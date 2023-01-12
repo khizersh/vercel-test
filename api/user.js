@@ -9,7 +9,23 @@ const path = "./csv/user.csv"
 
 router.post("/test", async (req, res) => { 
 
-    res.send( req.body )
+    const csvWriter = createCsvWriter({
+        path: path,
+        header: [
+          { id: "name", title: "Name" },
+          { id: "email", title: "Email" },
+          { id: "password", title: "Password" },
+          { id: "freeUser", title: "Free User" },
+        ],
+      });
+
+      csvWriter
+      .writeRecords([]) // returns a promise
+      .then(() => {
+        res.send({ status: 0000, message: "success" }).status(200);
+      });
+
+    // res.send( req.body )
 })
 
 
